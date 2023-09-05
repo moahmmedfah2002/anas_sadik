@@ -10,14 +10,17 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Contracts\Translation\TranslatorInterface;
+use \Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 class LoginController extends AbstractController
 {
     /**
      * @Route("/", name="app_login")
      */
-    public function Login(Request $request,  EntityManagerInterface $entityManager): Response
+    public function Login(Request $request,  EntityManagerInterface $entityManager,SessionInterface $session): Response
     {
+        $session->set('log', '0');
+        $request->setSession($session);
         $user = new Responsable();
         $form = $this->createForm(LoginFormType::class, $user);
         $form->handleRequest($request);
@@ -26,8 +29,8 @@ class LoginController extends AbstractController
           
             $user->setPass($form->get('Password')->getData());
 
-           
-            
+            $session->set('log', '1');
+            $request->setSession($session);
 
             return $this->redirectToRoute('app_home');
         }
