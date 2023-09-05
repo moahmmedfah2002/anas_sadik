@@ -10,29 +10,34 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Contracts\Translation\TranslatorInterface;
-use \Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 class LoginController extends AbstractController
 {
     /**
      * @Route("/", name="app_login")
      */
-    public function Login(Request $request,  EntityManagerInterface $entityManager,SessionInterface $session): Response
+    public function Login(Request $request,  EntityManagerInterface $entityManager): Response
     {
-        $session->set('log', '0');
-        $request->setSession($session);
-        $user = new Responsable();
+        $user=new Responsable;
         $form = $this->createForm(LoginFormType::class, $user);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
+        $session = $request->getSession();
+        $session->set('log', '0');
+        $l= $entityManager->getRepository(Responsable::class)->findAll();
+        
+        if($request->isMethod('post'))
+          {
+        
           
-            $user->setPass($form->get('Password')->getData());
+           
 
-            $session->set('log', '1');
-            $request->setSession($session);
-
+           $l= $entityManager->getRepository(Responsable::class)->findAll();
+            $login=$_POST['Login'];
+            $pass=$_POST['password'];
+            // do anything else you need here, like send an email
+            if(!strcmp($login, $l[0]->getLogin()) && !strcmp($pass,$l[0]->getPass())){
+                $session->set('log', '1');
             return $this->redirectToRoute('app_home');
+            }
         }
 
         return $this->render('Login/Login.html.twig', [

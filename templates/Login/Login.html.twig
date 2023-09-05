@@ -15,24 +15,24 @@
 		<div class="screen__content">
 			
             
-                    {{ form_start(LoginForm,{ 'attr' : {'class': 'login'}},{ 'attr' : {label :{'class': 'login'}}}) }}
+                    <form name="login_form" method="post" class="login">
                      <div class="login__field">
 					<i class="login__icon fas fa-user"></i>
-                        {{ form_row(LoginForm.Login,{ 'attr' : {'class': 'login__input'}}) }}
+                       <input type="text" id="login_form_Login" name="Login" required="required" maxlength="255" class="login__input">
                         </div>
                         <div class="login__field">
 					<i class="login__icon fas fa-lock"></i>
-                        {{ form_row(LoginForm.Password,{ 'attr' : {'class': 'login__input'}}) }}
+                        <input type="password" id="login_form_Password" name="password" required="required" class="login__input">
                         </div>
                         
                         
                        <button class="button login__submit">
-					<span class="button__text">Log In</span>
+					<span class="button__text">LOG IN</span>
 					
 				</button>				
 			
                     
-                    {{ form_end(LoginForm) }}
+                    </form>
                     </div>
 		<div class="screen__background">
 			<span class="screen__background__shape screen__background__shape4"></span>
