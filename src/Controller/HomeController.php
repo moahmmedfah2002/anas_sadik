@@ -15,15 +15,9 @@ class HomeController extends AbstractController
     /**
      * @Route("/home", name="app_home")
      */
-    public function index(AuthenticationUtils $authenticationUtils): Response
+    public function index(): Response
     {
-        if ($this->getUser()) {
-            return $this->redirectToRoute('target_path');
-         }
-         $error = $authenticationUtils->getLastAuthenticationError();
-         // last username entered by the user
-         $lastUsername = $authenticationUtils->getLastUsername();
-
+        
 
 
         return $this->render('home/index.html.twig', [
