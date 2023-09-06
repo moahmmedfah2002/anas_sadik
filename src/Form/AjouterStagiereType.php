@@ -18,15 +18,15 @@ class AjouterStagiereType extends AbstractType
             ->add('Nom')
             ->add('Prenom')
             ->add('D_naissance',DateType::class, array(
-                'widget' => 'choice',
+                
                 'years' => range(date('Y')-100, date('Y')-10),
-                'months' => range(date('m'), date('m')+12),
+                'months' => range(1,12),
                 'days' => range(1, 31),
               ))
             ->add('D_stage',DateType::class, array(
-                'widget' => 'choice',
+                
                 'years' => range(date('Y')-100, date('Y')),
-                'months' => range(date('m'), date('m')+12),
+                'months' => range(1, 12),
                 'days' => range(1, 31),
               ))
             ->add('validation')

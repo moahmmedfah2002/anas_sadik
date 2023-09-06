@@ -37,8 +37,20 @@ class HomeController extends AbstractController
             $stage = $form1->getData();
             $entityManager->persist($stage);
             $entityManager->flush();}
+
+
+
+            $q = $entityManager->createQuery('select p from App\Entity\Stagiaire p');
+            $users = $q->getResult();
+
+            $a=array();
+            foreach ($users as $row) {
+                array_push($a,$row);
+            }
+          
         return $this->render('home/index.html.twig', [
             'form1'=>$form1->createView(),
+            'st'=>$a
                ]);
     }
 }

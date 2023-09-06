@@ -40,9 +40,7 @@
                         <li class="nav-item">
                             <a class="nav-link" href="#section-3"><span class="icn"><i class="far fa-2x fa-images"></i></span> chercher stagier</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#section-4"><span class="icn"><i class="far fa-2x fa-user-circle"></i></span> valider stagier</a>
-                        </li>
+                       
                     </ul>
                 </div>
             </nav>
@@ -78,16 +76,46 @@
             <section class="work-section section" id="section-2">
 			<div style="background-color:rgba(255,255,255,0.5); margin-left:10% ;width:100%;height:110%;padding:10%">
             	 {{form(form1)}}
+	
 			</div>
             </section>
 
             <section class="gallery-section section parallax-window" data-parallax="scroll" data-image-src="img/section-3-bg.jpg" id="section-3">
-              
+              <div id='stage' style="background-color:rgba(25,25,25,0.5); margin-left:10% ;width:100%;height:90%;padding:10%">
+				<table style="color:black;font-size:30px">
+					<th>CIN</th>
+					<th>NOM</th>
+					<th>PRENOM</th>
+					<th>DATE DE NAISSANCE</th>
+					<th>DATE DE DEBUT STAGE</th>
+					{% for i in st %}
+						<tr>
+						<td>{{i.getCIN()}}</td>
+						<td>{{i.getNOM()}}</td>
+						<td>{{i.getPRENOM()}}</td>
+						<td>{{i.getDNaissance()|date("m/d/Y")}}</td>
+						<td>{{i.getDStage()|date("m/d/Y")}}</td>
+						</tr>
+
+
+					{% endfor %}
+
+					<style>
+					#stage{
+						overflow:scroll;
+					}
+					td,th{
+							padding:20px;
+							border:2px solid black;
+
+
+					}</style>
+				</table>
+			
+			</div>
             </section>
 
-            <section class="contact-section section" id="section-4">
-                 
-            </section>
+            
         </main>
     </div>
     <script src="js/jquery-3.3.1.min.js"></script>
