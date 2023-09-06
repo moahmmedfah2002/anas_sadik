@@ -1,14 +1,15 @@
 <?php
 
 namespace App\Entity;
-
+use Symfony\Component\Form\FormTypeInterface;
+use Symfony\Component\Security\Core\User\UserInterface;
 use App\Repository\StagiaireRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass=StagiaireRepository::class)
  */
-class Stagiaire
+class Stagiaire implements UserInterface
 {
     /**
      * @ORM\Id
@@ -18,7 +19,7 @@ class Stagiaire
     private $id;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="string", length=255)
      */
     private $CIN;
 
@@ -123,4 +124,11 @@ class Stagiaire
 
         return $this;
     }
+   public  function getRoles(){}
+   public  function getPassword(){}
+   public  function getSalt(){}
+   public  function eraseCredentials(){}
+   public  function getUsername(){}
+   public  function getUserIdentifier(){}
+   
 }
